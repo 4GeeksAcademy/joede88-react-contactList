@@ -1,15 +1,15 @@
-import { Agendas } from "../components/HomePage/Agendas";
-import { InputHome } from "../components/HomePage/InputHome";
+import { Agendas } from "../pages/AgendasPage";
+import { Landing } from "../pages/LandingPage";
 
 export const routeConfig = [
   {
-    name: "Root",
+    name: "Home",
     path: "/",
-    page: <InputHome />,
+    page: <Landing />,
   },
   {
-    name: "Agenda",
-    path: "/agenda",
+    name: "Agendas",
+    path: "/agendas",
     page: <Agendas />,
   },
 ];

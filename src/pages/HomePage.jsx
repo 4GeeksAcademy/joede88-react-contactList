@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router";
+import { routeConfig } from "../routing/routerConfig";
 import Bienvenidos from "../components/HomePage/Bienvenidos";
 import WelcomeAlert from "../components/HomePage/WelcomeAlert";
-import { routeConfig } from "../routing/routerConfig";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/HomePage/Navbar";
+import { ContactsPage } from "./ContactsPage";
 
 const HomePage = () => {
-
+  
   return (
     <>
       <Bienvenidos />
@@ -13,11 +14,9 @@ const HomePage = () => {
       <Navbar />
       <Routes>
         {routeConfig.map((route) => {
-          return (
-            <Route path={route.path} element={route.page} />
-          )
-        })
-        }
+          return <Route key={route.path} path={route.path} element={route.page} />;
+        })}
+        <Route path="agendas/:slug" element={<ContactsPage />} />;
       </Routes>
     </>
   );
