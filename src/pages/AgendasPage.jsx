@@ -34,7 +34,6 @@ export const Agendas = () => {
         .then((data) => {
           setAgendas([...agendas, { slug: inputValue }]);
           setInputValue("");
-          console.log("Agenda creada:", data);
         })
         .catch((err) => console.log(`error:`, err));
 
@@ -54,29 +53,32 @@ export const Agendas = () => {
   return (
     <>
       <div className="input mb-1 text-center">
-        <input className=" border rounded input" value={inputValue} type="text" placeholder="Post new agenda" onKeyDown={(e) => postAgenda(e)}
+        <input className="border rounded input" value={inputValue} type="text" placeholder="Post new agenda" onKeyDown={(e) => postAgenda(e)}
           onChange={(e) => setInputValue(e.target.value)} />
       </div>
-      <div className="text-center agendas">
+      <div className="cajaAgendas">
         {agendas.map((person) => {
           return (
-            <div
-              className="  m-1 border border-3 rounder fw-bold"
-              key={person.id} onMouseEnter={() => setIsUserHovered(person.slug)}
-              onMouseLeave={() => setIsUserHovered("")}
-            >
-              <NavLink className="mx-3" to={`/agendas/${person.slug}`} end>{person.slug}</NavLink>
-              <span
-                className="float-end me-3 fw-bold"
-                role="button"
-                style={{
-                  visibility: isUserHovered === person.slug ? "visible" : "hidden",
-                }}
-                onClick={() => deleteAgenda(person.slug)}
-              >
-                X
-              </span>
-            </div>
+            <>
+              <div className="agendas m-1 border rounded fw-bold" key={person.id} onMouseEnter={() => setIsUserHovered(person.slug)}
+                onMouseLeave={() => setIsUserHovered("")}>
+                <NavLink
+                  to={`/agendas/${person.slug}`} end>{person.slug}</NavLink>
+                <div className="cajaCloseBtn">
+                  <span
+                    className="closeBtn fw-bold"
+                    role="button"
+                    style={{
+                      visibility: isUserHovered === person.slug ? "visible" : "hidden",
+                    }}
+                    onClick={() => deleteAgenda(person.slug)}
+                  >
+                    X
+                  </span>
+                </div>
+              </div>
+
+            </>
           );
         })}
       </div>

@@ -1,12 +1,13 @@
+import { isEmpty } from "lodash";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router";
 
 export const ContactsPage = () => {
     const [contactos, setContactos] = useState([])
-    const [inputNameValue, setInputNameValue] = useState([])
-    const [inputEmailValue, setInputEmailValue] = useState([])
-    const [inputPhoneValue, setInputPhoneValue] = useState([])
-    const [inputAddressValue, setInputAddressValue] = useState([])
+    const [inputNameValue, setInputNameValue] = useState("")
+    const [inputEmailValue, setInputEmailValue] = useState("")
+    const [inputPhoneValue, setInputPhoneValue] = useState("")
+    const [inputAddressValue, setInputAddressValue] = useState("")
     let { slug } = useParams();
 
     let contactData = {
@@ -26,7 +27,6 @@ export const ContactsPage = () => {
         })
             .then((res) => res.json())
             .then((response) => {
-                console.log(response)
                 setInputNameValue("")
                 setInputEmailValue("")
                 setInputPhoneValue("")
@@ -36,6 +36,27 @@ export const ContactsPage = () => {
     }
 
     const addContacts = () => {
+        const emailRegex = new RegExp("^[\\w\\-\\.]+@([\\w\\-]+\\.)+[\\w\\-]{2,4}$");
+        const phoneRegex = /^[0-9]+$/
+        if (!emailRegex.test(inputEmailValue)) {
+            alert("invalid email input");
+            return;
+        }
+
+        if (!phoneRegex.test(inputPhoneValue)) {
+            alert("Phone number must contain only digits.");
+            return;
+        }
+
+        if (
+            inputNameValue.trim() === "" ||
+            inputEmailValue.trim() === "" ||
+            inputPhoneValue.trim() === "" ||
+            inputAddressValue.trim() === ""
+        ) {
+            alert("All fields are required.");
+            return;
+        }
         postContacts(slug)
     }
 
@@ -55,34 +76,41 @@ export const ContactsPage = () => {
 
     return (
         <>
-            <div>
-                {contactos.map((contacto) => {
-                    return (<>
-                        <div key={contacto.id}>
-                            <h4 key={contacto.name}>Name: {contacto.name}</h4>
-                            <h4 key={contacto.phone}>Phone Number: {contacto.phone}</h4>
-                            <h4 key={contacto.email}>E-mail: {contacto.email}</h4>
-                            <h4 key={contacto.address}>Address: {contacto.address}</h4><hr />
-                        </div>
-                    </>
-                    )
-                })}
+            <div className="cajaNoContacts">
+                {isEmpty(contactos) ? (
+                    <div className="noContacts bg-warning-subtle border border-black rounded mb-1">
+                        No contacts added
+                    </div>
+                ) : (
+                     contactos.map((contacto) => {
+                            return (<>
+                                <div key={contacto.id}>
+                                    <h4>Name: {contacto.name}</h4>
+                                    <h4>Phone Number: {contacto.phone}</h4>
+                                    <h4>E-mail: {contacto.email}</h4>
+                                    <h4>Address: {contacto.address}</h4><hr />
+                                </div>
+                            </>
+                            )
+                        })
+                    )}
+                
             </div><hr />
-            <div>
+            <div className="cajaInput">
                 <h1>Add new Contact</h1>
                 <h4>
-                    <input type="text" value={inputNameValue} onChange={(e) => setInputNameValue(e.target.value)} placeholder="Full name" />
+                    <input className="border rounded" type="text" value={inputNameValue} onChange={(e) => setInputNameValue(e.target.value)} placeholder="Full name" />
                 </h4>
                 <h4>
-                    <input type="text" value={inputEmailValue} onChange={(e) => setInputEmailValue(e.target.value)} placeholder="E-mail" />
+                    <input className="border rounded" type="text" value={inputPhoneValue} onChange={(e) => setInputPhoneValue(e.target.value)} placeholder="Phone number" />
                 </h4>
                 <h4>
-                    <input type="text" value={inputPhoneValue} onChange={(e) => setInputPhoneValue(e.target.value)} placeholder="Phone number" />
+                    <input className="border rounded" type="text" value={inputEmailValue} onChange={(e) => setInputEmailValue(e.target.value)} placeholder="E-mail" />
                 </h4>
                 <h4>
-                    <input type="text" value={inputAddressValue} onChange={(e) => setInputAddressValue(e.target.value)} placeholder="Address" />
+                    <input className="border rounded" type="text" value={inputAddressValue} onChange={(e) => setInputAddressValue(e.target.value)} placeholder="Address" />
                 </h4>
-                <button onClick={(e) => addContacts(e.target.value)}>Save</button>
+                <button className="contactBtn border-2 rounded" onClick={(e) => addContacts(e.target.value)}>Save</button>
             </div>
         </>
     )

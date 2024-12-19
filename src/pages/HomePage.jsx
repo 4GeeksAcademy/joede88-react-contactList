@@ -14,7 +14,7 @@ const HomePage = () => {
       <Navbar />
       <Routes>
         {routeConfig.map((route) => {
-          return <Route key={route.path} path={route.path} element={route.page} />;
+          return <Route key={route.name} path={route.path} element={route.page} />;
         })}
         <Route path="agendas/:slug" element={<ContactsPage />} />;
       </Routes>

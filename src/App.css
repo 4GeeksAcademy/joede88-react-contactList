@@ -1,9 +1,63 @@
-.agendas {
-  margin: auto;
-  width: 60%;
-}
-
 .input {
   margin: auto;
-  width: 60%;
+  width: 250px;
+}
+
+.cajaAgendaBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.agendaBtn {
+  background-color: #ff9b71;
+  width: 125px;
+}
+
+.cajaAgendas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.agendas {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 50px;
+}
+
+.cajaCloseBtn {
+  position: absolute;
+}
+
+.closeBtn {
+  position: relative;
+  right: -110px;
+}
+
+.cajaNoContacts {
+  display: flex;
+  justify-content: center;
+}
+
+.noContacts {
+  display: flex;
+  justify-content: center;
+  width: 250px;
+}
+
+.cajaInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.contactBtn {
+  justify-content: center;
+  width: 100px;
+  background-color: #aee5d8;
 }

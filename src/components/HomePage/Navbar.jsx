@@ -1,22 +1,22 @@
 import { routeConfig } from "../../routing/routerConfig";
 import { NavLink } from "react-router";
 
-import Nav from "react-bootstrap/Nav";
 
 const Navbar = () => {
   return (
     <>
-      <Nav className="mb-3" fill variant="tabs">
-        <Nav.Item>
-          {routeConfig.map((ruta) => {
-            return (
-              <NavLink key={ruta.path} className="mx-3" to={ruta.path} end>
+      <div className="cajaAgendaBtn mb-3">
+        {routeConfig.map((ruta) => {
+          return (
+              <NavLink key={ruta.path}  to={ruta.path} end>
+                <button className="agendaBtn rounded">
                 {ruta.name}
+                </button>
               </NavLink>
-            );
-          })}
-        </Nav.Item>
-      </Nav>
+            
+          );
+        })}
+      </div>
     </>
   );
 };
