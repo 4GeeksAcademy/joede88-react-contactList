@@ -9,7 +9,8 @@
 }
 
 .agendaBtn {
-  background-color: #ff9b71;
+  color: white;
+  background-color: #885053;
   width: 125px;
 }
 
@@ -27,6 +28,7 @@
   align-items: center;
   width: 250px;
   height: 50px;
+  background-color: #aee5d8;
 }
 
 .cajaCloseBtn {
@@ -38,18 +40,32 @@
   right: -110px;
 }
 
-.cajaNoContacts {
-  display: flex;
-  justify-content: center;
+.tableWrapper {
+  margin: auto;
+  width: 80%;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #373f47 !important;
+}
+
+thead,
+th {
+  background-color: #aee5d8;
+  border: 2px solid #373f47 !important;
+  padding: 8px;
 }
 
 .noContacts {
-  display: flex;
-  justify-content: center;
-  width: 250px;
+  text-align: center;
+  color: #666;
+  font-size: 1.5em;
+  padding: 20px;
 }
 
-.cajaInput {
+.cajaInputContact {
   display: flex;
   justify-content: center;
   align-items: center;

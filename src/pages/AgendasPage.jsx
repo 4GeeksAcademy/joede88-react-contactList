@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink} from "react-router";
 
 
 export const Agendas = () => {
   const [agendas, setAgendas] = useState([]);
   const [isUserHovered, setIsUserHovered] = useState("");
   const [inputValue, setInputValue] = useState("");
-
   useEffect(() => {
     fetchAgendas(setAgendas)
   }, []);
@@ -63,7 +62,7 @@ export const Agendas = () => {
               <div className="agendas m-1 border rounded fw-bold" key={person.id} onMouseEnter={() => setIsUserHovered(person.slug)}
                 onMouseLeave={() => setIsUserHovered("")}>
                 <NavLink
-                  to={`/agendas/${person.slug}`} end>{person.slug}</NavLink>
+                  to={`/agendas/${person.slug}/contacts`} end>{person.slug}</NavLink>
                 <div className="cajaCloseBtn">
                   <span
                     className="closeBtn fw-bold"

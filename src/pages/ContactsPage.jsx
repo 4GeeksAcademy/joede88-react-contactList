@@ -76,27 +76,42 @@ export const ContactsPage = () => {
 
     return (
         <>
-            <div className="cajaNoContacts">
-                {isEmpty(contactos) ? (
-                    <div className="noContacts bg-warning-subtle border border-black rounded mb-1">
-                        No contacts added
-                    </div>
-                ) : (
-                     contactos.map((contacto) => {
-                            return (<>
-                                <div key={contacto.id}>
-                                    <h4>Name: {contacto.name}</h4>
-                                    <h4>Phone Number: {contacto.phone}</h4>
-                                    <h4>E-mail: {contacto.email}</h4>
-                                    <h4>Address: {contacto.address}</h4><hr />
-                                </div>
-                            </>
+            <table className="tableWrapper">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>E-mail</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {isEmpty(contactos) ? (
+                        <tr>
+                            <td colSpan="4" className="noContacts">
+                                No contacts added
+                            </td>
+                        </tr>
+                    ) : (
+                        contactos.map((contacto) => {
+                            return (
+                                <>
+                                    <tr key={contacto.id}>
+                                        <td>{contacto.name}</td>
+                                        <td>{contacto.phone}</td>
+                                        <td>{contacto.email}</td>
+                                        <td>{contacto.address}</td>
+                                    </tr>
+
+                                </>
                             )
                         })
                     )}
-                
-            </div><hr />
-            <div className="cajaInput">
+                </tbody>
+            </table>
+            <hr />
+
+            <div className="cajaInputContact">
                 <h1>Add new Contact</h1>
                 <h4>
                     <input className="border rounded" type="text" value={inputNameValue} onChange={(e) => setInputNameValue(e.target.value)} placeholder="Full name" />
