@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { NavLink} from "react-router";
+import { NavLink } from "react-router";
 
 
 export const Agendas = () => {
@@ -58,8 +58,8 @@ export const Agendas = () => {
       <div className="cajaAgendas">
         {agendas.map((person) => {
           return (
-            <>
-              <div className="agendas m-1 border rounded fw-bold" key={person.id} onMouseEnter={() => setIsUserHovered(person.slug)}
+            
+              <div className="agendas m-1 border rounded fw-bold" key={person.slug} onMouseEnter={() => setIsUserHovered(person.slug)}
                 onMouseLeave={() => setIsUserHovered("")}>
                 <NavLink
                   to={`/agendas/${person.slug}/contacts`} end>{person.slug}</NavLink>
@@ -76,8 +76,6 @@ export const Agendas = () => {
                   </span>
                 </div>
               </div>
-
-            </>
           );
         })}
       </div>
