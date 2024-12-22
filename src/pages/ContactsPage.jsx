@@ -79,10 +79,10 @@ export const ContactsPage = () => {
             <table className="tableWrapper">
                 <thead>
                     <tr>
-                        <th key={1}>Name</th>
-                        <th key={2}>Phone Number</th>
-                        <th key={3}>E-mail</th>
-                        <th key={4}>Address</th>
+                        <th >Name</th>
+                        <th >Phone Number</th>
+                        <th >E-mail</th>
+                        <th >Address</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,12 +95,12 @@ export const ContactsPage = () => {
                     ) : (
                         contactos.map((contacto) => {
                             return (
-                                    <tr key={contacto.id}>
-                                        <td>{contacto.name}</td>
-                                        <td>{contacto.phone}</td>
-                                        <td>{contacto.email}</td>
-                                        <td>{contacto.address}</td>
-                                    </tr>
+                                <tr key={contacto.id}>
+                                    <td>{contacto.name}</td>
+                                    <td>{contacto.phone}</td>
+                                    <td>{contacto.email}</td>
+                                    <td>{contacto.address}</td>
+                                </tr>
                             )
                         })
                     )}
