@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router";
-import { getAgendas, postAgendas } from "../services/api";
+import { deleteAgenda, getAgendas, postAgendas } from "../services/api/agendas";
 
 export const Agendas = () => {
   const [agendas, setAgendas] = useState([]);
@@ -9,7 +9,9 @@ export const Agendas = () => {
   const [inputAgendaValue, setInputAgendaValue] = useState("");
 
   useEffect(() => {
-    getAgendas(setAgendas)
+    getAgendas().then((agendas) => setAgendas(agendas))
+    .catch((error)=> {console.error(error);
+    })
   }, []);
 
   // función para crear nueva agenda
@@ -20,14 +22,10 @@ export const Agendas = () => {
     }
   }
 
-  const deleteAgenda = (slug) => {
-    fetch(`https://playground.4geeks.com/contact/agendas/${slug}`, {
-      method: "DELETE"
-    }
-    )
-      .then(() => {
-        getAgendas(setAgendas)
-      })
+  const removeAgenda = (slug) => {
+    deleteAgenda(slug).then(() => {
+      setAgendas(prevAgendas => prevAgendas.filter(agenda => agenda.slug !== slug))
+    })
   }
 
   return (
@@ -51,7 +49,7 @@ export const Agendas = () => {
                   style={{
                     visibility: isUserHovered === person.slug ? "visible" : "hidden",
                   }}
-                  onClick={() => deleteAgenda(person.slug)}
+                  onClick={() => removeAgenda(person.slug)}
                 >
                   X
                 </span>

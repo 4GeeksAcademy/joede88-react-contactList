@@ -1,6 +1,8 @@
 import { isEmpty } from "lodash";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router";
+import { getContactos } from "../services/api/contacts";
+
 
 export const ContactsPage = () => {
     const [contactos, setContactos] = useState([])
@@ -16,6 +18,11 @@ export const ContactsPage = () => {
         "email": `${inputEmailValue}`,
         "address": `${inputAddressValue}`
     }
+
+    useEffect(() => {
+        getContactos(slug,setContactos)
+    }, [slug])
+
 
     const postContacts = (nombre) => {
         fetch(`https://playground.4geeks.com/contact/agendas/${nombre}/contacts`, {
@@ -59,20 +66,6 @@ export const ContactsPage = () => {
         }
         postContacts(slug)
     }
-
-    const getContactos = (nombre) => {
-        fetch(`https://playground.4geeks.com/contact/agendas/${nombre}/contacts`, {
-            method: "GET"
-        })
-            .then((res) => res.json())
-            .then((response) => {
-                setContactos(response.contacts)
-            })
-    }
-
-    useEffect(() => {
-        getContactos(slug)
-    }, [slug])
 
     return (
         <>
